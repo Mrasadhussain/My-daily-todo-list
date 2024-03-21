@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily | Todo List | JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+</head>
+<body>
+    
+<div class="container">
+    <div id="newtask">
+        <input type="text" placeholder="Task to be done ....">
+        <button id="push">ADD</button>
+    </div>
+    <div id="tasks"></div>
+</div>
+
+<!-- now add JavaScript -->
+<script src="./app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector("#push").onclick = function() {
+        var taskInput = document.querySelector("#newtask input");
+
+        if (taskInput.value.trim().length == 0) {
+            alert("Please Enter a Task");
+        } else {
+            document.querySelector("#tasks").innerHTML += `
+            <div class="task">
+                <span class="taskname">
+                    ${taskInput.value}
+                </span>
+                <button class="delete">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+            `;
+        }
+        // Clear input after adding task
+        taskInput.value = "";
+
+        // Add event listener to new delete button
+        var deleteButtons = document.querySelectorAll('.delete');
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+    };
+});
+</script>
+</body>
+</html>
